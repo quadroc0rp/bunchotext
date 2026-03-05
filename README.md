@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./docs/icon.svg" alt="bunchotext logo" height="120">
+  <img src="./docs/icon.svg" alt="bunchotext logo" height="200">
 </p>
 
 <p align="center">
@@ -119,47 +119,89 @@ go install github.com/quadrocorp/bunchotext/cmd/bunchotext@latest
 *Note: This requires the module to be published and accessible via Go proxy.*
 
 ---
-
 ## 🚀 Usage
 
-### Basic Command
+### Command Structure
+
 ```bash
-./bunchotext -d <directory> -t <language> -o <output_file>
+bunchotext [command] [flags]
 ```
+
+### Available Commands
+
+| Command  | Description                                                     | Example                      |
+| -------- | --------------------------------------------------------------- | ---------------------------- |
+| _(none)_ | **Basic mode**: Bundle files of a specific type (requires `-t`) | `bunchotext -t go`           |
+| `auto`   | **Auto mode**: Detect dominant file type and bundle             | `bunchotext auto`            |
+| `all`    | **All mode**: Bundle all text files with optional filters       | `bunchotext all --gitignore` |
+| `help`   | Show help for any command                                       | `bunchotext help auto`       |
+
+## Global Flags (work with all commands)
+
+| Flag       | Short | Default      | Description                              |
+| ---------- | ----- | ------------ | ---------------------------------------- |
+| `--dir`    | `-d`  | `.`          | Root directory to scan for files         |
+| `--output` | `-o`  | `output.txt` | Destination file path for bundled output |
+
+### Mode-Specific Flags
+
+#### Basic Mode (root command)
+
+| Flag     | Short | Required | Description                                      |
+| -------- | ----- | -------- | ------------------------------------------------ |
+| `--type` | `-t`  | ✅ Yes    | File type preset: `go`, `py`, `js`, `ts`, `json` |
+
+#### Auto Mode (`auto` subcommand)
+
+_No additional flags required_ — automatically detects the most common file type.
+
+#### All Mode (`all` subcommand)
+
+| Flag                | Default | Description                                                 |
+| ------------------- | ------- | ----------------------------------------------------------- |
+| `--gitignore`       | `false` | Respect `.gitignore` rules from the root directory          |
+| `--use-ignore-dirs` | `true`  | Exclude standard directories (`.git`, `node_modules`, etc.) |
+| `--no-ignore-dirs`  | `false` | Include ALL directories, overriding `--use-ignore-dirs`     |
 
 ### Quick Examples
+
 ```bash
-# Bundle Go files in current directory
-./bunchotext -t go -o project_context.txt
+# 🔹 Basic: Bundle Go files from current directory
+./bunchotext -t go -o go_context.txt
 
-# Bundle Python scripts from a specific folder
-./bunchotext -d ./scripts -t py -o python_bundle.txt
+# 🔹 Basic: Bundle Python files from specific folder
+./bunchotext -d ./src -t py -o python_bundle.txt
 
-# Bundle TypeScript files for AI analysis
-./bunchotext -d ./src -t ts -o ai_context.txt
+# 🔹 Auto: Detect and bundle the dominant file type
+./bunchotext auto -o detected.txt
+
+# 🔹 All: Bundle everything, respecting .gitignore
+./bunchotext all --gitignore -o full_backup.txt
+
+# 🔹 All: Bundle everything including node_modules and .git
+./bunchotext all --no-ignore-dirs -o everything.txt
+
+# 🔹 Help: View available commands and flags
+./bunchotext --help
+./bunchotext auto --help
+./bunchotext all --help
 ```
 
-### Arguments
-
-| Flag | Description                                           | Default           |
-|------|-------------------------------------------------------|-------------------|
-| `-d` | The root directory to scan for files.                 | `.` (current dir) |
-| `-t` | The file type preset to use (`go`, `py`, `js`, `ts`). | `go`              |
-| `-o` | The name of the output text file.                     | `output.txt`      |
-
 ### Output Format
-The generated file uses a clear separator format to denote file boundaries:
+
+All modes use consistent, clean formatting with clear file separators:
 
 ```text
 =========================
 # internal/core/config.go
 =========================
+
 package core
 ...
-
 ============================
 # internal/core/processor.go
 ============================
+
 package core
 ...
 ```
@@ -170,12 +212,13 @@ package core
 
 Out of the box, **bunchotext** supports the following presets:
 
-| Preset | Extensions |
-|--------|-----------|
-| `go` | `.go`, `.mod`, `.sum` |
-| `py` | `.py`, `.pyw`, `.ipynb` |
-| `js` | `.js`, `.jsx`, `.mjs`, `.cjs`, `.json` |
-| `ts` | `.ts`, `.tsx`, `.d.ts` |
+| Preset | Extensions                                       |
+| ------ | ------------------------------------------------ |
+| `go`   | `.go`, `.mod`, `.sum`                            |
+| `py`   | `.py`, `.pyw`, `.ipynb`                          |
+| `js`   | `.js`, `.jsx`, `.mjs`, `.cjs`, `.json`, `.jsonc` |
+| `ts`   | `.ts`, `.tsx`, `.d.ts`, `.json`, `.jsonc`        |
+| `json` | `.json`, `.jsonc`                                |
 
 > 💡 Want to add support for another language? See [Contributing](#contributing).
 
@@ -184,12 +227,17 @@ Out of the box, **bunchotext** supports the following presets:
 ## 🛠️ Development
 
 ### Project Structure
+
 ```
 bunchotext/
 ├── cmd/
 │   └── bunchotext/
 │       └── main.go          # CLI entry point
 ├── internal/
+│   ├── cmd/                 # Cobra
+    │   ├── all.go
+    │   ├── root.go
+    │   └── auto.go
 │   └── core/
 │       ├── config.go        # File patterns & ignore rules
 │       └── processor.go     # Core processing logic
@@ -200,6 +248,7 @@ bunchotext/
 ```
 
 ### Makefile Targets
+
 ```bash
 make build          # Build for current platform
 make build-linux    # Build for Linux (amd64)
@@ -213,11 +262,13 @@ make help           # Show available targets
 ```
 
 ### Running Tests
+
 ```bash
 go test ./...
 ```
 
 ### Creating a Release
+
 ```bash
 # 1. Clean previous builds
 make clean
@@ -240,48 +291,37 @@ ls -lh bunchotext-*
 ```
 
 ---
-
-## 🎬 Demo
-### Terminal Usage
-
-<p align="center">
-
-<img src="./docs/demo_usage.gif" alt="bunchotext terminal usage" width="800">
-
-</p>
-
-<p align="center">
-
-<em>Quickly bundle your codebase with a single command</em>
-
-</p>
----
-
-### Output Preview
-
-<p align="center">
-
-<img src="./docs/demo_output.gif" alt="bunchotext output preview" width="800">
-
-</p>
-
-<p align="center">
-
-<em>Clean, formatted output ready for AI analysis</em>
-
-</p>
----
-
 ## 🗺️ Roadmap
 
-We plan to expand **bunchotext** to make it even more flexible for developers and AI enthusiasts.
+| Feature                        | Status      | Version | Description                                                   |
+| ------------------------------ | ----------- | ------- | ------------------------------------------------------------- |
+| **Core Foundation**            |             |         |                                                               |
+| Basic mode with type filtering | ✅ Completed | v1.0.0  | Bundle files by preset type (`go`, `py`, `js`, `ts`)          |
+| Smart directory ignoring       | ✅ Completed | v1.0.0  | Skip `.git`, `node_modules`, `vendor`, etc. by default        |
+| Clear output formatting        | ✅ Completed | v1.0.0  | File headers with separators for easy parsing                 |
+| Multi-platform builds          | ✅ Completed | v1.0.0  | Pre-built binaries for Linux, macOS, Windows                  |
+| **CLI Enhancements**           |             |         |                                                               |
+| Cobra framework migration      | ✅ Completed | v1.1.0  | Refactored to industry-standard CLI framework                 |
+| Auto mode (type detection)     | ✅ Completed | v1.1.0  | Automatically detect and bundle dominant file type            |
+| All mode (unfiltered bundle)   | ✅ Completed | v1.1.0  | Bundle all text files regardless of extension                 |
+| Gitignore support              | ✅ Completed | v1.1.0  | Optional `.gitignore` pattern matching via `--gitignore`      |
+| Binary file detection          | ✅ Completed | v1.1.0  | Skip non-text files to avoid corrupt output                   |
+| `--no-ignore-dirs` flag        | ✅ Completed | v1.1.0  | Override default ignores for complete backups                 |
+| VS Code tasks integration      | ✅ Completed | v1.1.0  | Pre-configured build/debug tasks for contributors             |
+| License compliance docs        | ✅ Completed | v1.1.0  | `THIRD-PARTY-NOTICES.md` for dependency transparency          |
+| **Planned Features**           |             |         |                                                               |
+| JSON configuration file        | 📋 Planned  | v1.2.0  | Define custom presets and ignore rules via `.bunchotext.json` |
+| Extended language presets      | 📋 Planned  | v1.2.0  | Add `rs`, `cpp`, `rb`, `php`, `java`, `cs` support            |
+| Nested `.gitignore` support    | 📋 Planned  | v1.2.0  | Respect `.gitignore` files in subdirectories                  |
+| Homebrew formula               | 📋 Planned  | v1.2.0  | `brew install bunchotext` for macOS users                     |
+| Chocolatey package             | 📋 Planned  | v1.2.0  | `choco install bunchotext` for Windows users                  |
+| Custom header/footer templates | 📋 Planned  | v1.3.0  | User-defined formatting for bundled output                    |
+| Pre-configured AI templates    | 📋 Planned  | v1.3.0  | Auto-add system prompts for Claude, GPT, Gemini, etc.         |
+| Progress bar / verbose output  | 📋 Planned  | v1.3.0  | Visual feedback during large directory scans                  |
+| Streaming mode for large repos | 📋 Planned  | v2.0.0  | Process files incrementally to reduce memory usage            |
+**Legend**: ✅ Completed | 🔄 In Progress | 📋 Planned
 
-- [ ] **All-Files Mode:** A flag to bundle every text file regardless of extension.
-- [ ] **JSON Configuration:** Allow users to define custom file extensions and ignore rules via a `.bunchotext.json` config file instead of recompiling.
-- [ ] **Extended Presets:** Add support for Rust, C++, Ruby, PHP, and other languages.
-- [ ] **Custom Formatting:** Allow users to define custom header/footer templates for bundled files.
-- [ ] **Pre-configured AI Templates:** Automatically add system prompts or context headers for specific AI models.
-- [ ] **Binary Releases on Homebrew/Chocolatey:** One-line installs for package managers.
+> 💡 Have a feature request? [Open an issue](https://github.com/quadrocorp/bunchotext/issues)
 
 ---
 <a id="contributing"></a>
@@ -307,7 +347,7 @@ Contributions are welcome! Since file type associations are stored in simple map
 - Update the README if adding user-facing features
 
 ### Reporting Issues
-Found a bug or have a feature request? [Open an issue](https://github.com/quadrocorp/bunchotext/issues  ) with:
+Found a bug or have a feature request? [Open an issue](https://github.com/quadrocorp/bunchotext/issues) with:
 - A clear description of the problem or idea
 - Steps to reproduce (for bugs)
 - Your OS and Go version (if relevant)
