@@ -1,0 +1,250 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "build",
+			"type": "shell",
+			"command": "make",
+			"args": [
+				"build"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": [
+				"$go"
+			],
+			"detail": "Build bunchotext for current platform",
+			"presentation": {
+				"reveal": "always",
+				"panel": "new"
+			}
+		},
+		{
+			"label": "build:linux",
+			"type": "shell",
+			"command": "make",
+			"args": [
+				"build-linux"
+			],
+			"group": "build",
+			"problemMatcher": [
+				"$go"
+			],
+			"detail": "Build for Linux (amd64)",
+			"presentation": {
+				"reveal": "silent",
+				"panel": "shared"
+			}
+		},
+		{
+			"label": "build:mac-amd64",
+			"type": "shell",
+			"command": "make",
+			"args": [
+				"build-mac"
+			],
+			"group": "build",
+			"problemMatcher": [
+				"$go"
+			],
+			"detail": "Build for macOS (amd64)",
+			"presentation": {
+				"reveal": "silent",
+				"panel": "shared"
+			}
+		},
+		{
+			"label": "build:mac-arm64",
+			"type": "shell",
+			"command": "make",
+			"args": [
+				"build-mac"
+			],
+			"group": "build",
+			"problemMatcher": [
+				"$go"
+			],
+			"detail": "Build for macOS (arm64)",
+			"presentation": {
+				"reveal": "silent",
+				"panel": "shared"
+			}
+		},
+		{
+			"label": "build:windows",
+			"type": "shell",
+			"command": "make",
+			"args": [
+				"build-windows"
+			],
+			"group": "build",
+			"problemMatcher": [
+				"$go"
+			],
+			"detail": "Build for Windows (amd64)",
+			"presentation": {
+				"reveal": "silent",
+				"panel": "shared"
+			}
+		},
+		{
+			"label": "release",
+			"type": "shell",
+			"command": "make",
+			"args": [
+				"release"
+			],
+			"group": "build",
+			"problemMatcher": [
+				"$go"
+			],
+			"detail": "Build all platforms for release",
+			"presentation": {
+				"reveal": "always",
+				"panel": "new"
+			}
+		},
+		{
+			"label": "install",
+			"type": "shell",
+			"command": "make",
+			"args": [
+				"install"
+			],
+			"group": "build",
+			"problemMatcher": [],
+			"detail": "Build and install to ~/.local/bin",
+			"presentation": {
+				"reveal": "always",
+				"panel": "new"
+			}
+		},
+		{
+			"label": "uninstall",
+			"type": "shell",
+			"command": "make",
+			"args": [
+				"uninstall"
+			],
+			"group": "build",
+			"problemMatcher": [],
+			"detail": "Remove installed binary",
+			"presentation": {
+				"reveal": "always",
+				"panel": "new"
+			}
+		},
+		{
+			"label": "clean",
+			"type": "shell",
+			"command": "make",
+			"args": [
+				"clean"
+			],
+			"group": "build",
+			"problemMatcher": [],
+			"detail": "Remove build artifacts",
+			"presentation": {
+				"reveal": "silent",
+				"panel": "shared"
+			}
+		},
+		{
+			"label": "help",
+			"type": "shell",
+			"command": "make",
+			"args": [
+				"help"
+			],
+			"group": "build",
+			"problemMatcher": [],
+			"detail": "Show available Makefile targets",
+			"presentation": {
+				"reveal": "always",
+				"panel": "new"
+			}
+		},
+		{
+			"label": "run:basic",
+			"type": "shell",
+			"command": "${workspaceFolder}/bunchotext",
+			"args": [
+				"-t",
+				"go",
+				"-o",
+				"output.txt"
+			],
+			"group": "test",
+			"problemMatcher": [],
+			"detail": "Run bunchotext in basic mode (Go files)",
+			"presentation": {
+				"reveal": "always",
+				"panel": "new"
+			},
+			"dependsOn": [
+				"build"
+			]
+		},
+		{
+			"label": "run:auto",
+			"type": "shell",
+			"command": "${workspaceFolder}/bunchotext",
+			"args": [
+				"auto",
+				"-o",
+				"codebase.txt"
+			],
+			"group": "test",
+			"problemMatcher": [],
+			"detail": "Run bunchotext in auto mode",
+			"presentation": {
+				"reveal": "always",
+				"panel": "new"
+			},
+			"dependsOn": [
+				"build"
+			]
+		},
+		{
+			"label": "run:all",
+			"type": "shell",
+			"command": "${workspaceFolder}/bunchotext",
+			"args": [
+				"all",
+				"--gitignore",
+				"-o",
+				"full.txt"
+			],
+			"group": "test",
+			"problemMatcher": [],
+			"detail": "Run bunchotext in all mode with gitignore",
+			"presentation": {
+				"reveal": "always",
+				"panel": "new"
+			},
+			"dependsOn": [
+				"build"
+			]
+		},
+		{
+			"label": "run:help",
+			"type": "shell",
+			"command": "${workspaceFolder}/bunchotext",
+			"args": [
+				"--help"
+			],
+			"group": "test",
+			"problemMatcher": [],
+			"detail": "Show bunchotext help",
+			"presentation": {
+				"reveal": "always",
+				"panel": "new"
+			},
+			"dependsOn": [
+				"build"
+			]
+		}
+	]
+}
