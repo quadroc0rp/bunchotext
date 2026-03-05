@@ -27,6 +27,16 @@ go.work.sum
 # env file
 .env
 
-Editor/IDE
+# Editor/IDE
 .idea/
 **/.obsidian
+
+
+# bunchotext binary and output
+**/bunchotext
+**/bunchotext-darwin-amd64
+**/bunchotext-darwin-arm64
+**/bunchotext-linux-amd64
+**/bunchotext-windows-amd64.exe
+
+**/codebase*
