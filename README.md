@@ -319,6 +319,7 @@ ls -lh bunchotext-*
 | Pre-configured AI templates    | 📋 Planned  | v1.3.0  | Auto-add system prompts for Claude, GPT, Gemini, etc.         |
 | Progress bar / verbose output  | 📋 Planned  | v1.3.0  | Visual feedback during large directory scans                  |
 | Streaming mode for large repos | 📋 Planned  | v2.0.0  | Process files incrementally to reduce memory usage            |
+
 **Legend**: ✅ Completed | 🔄 In Progress | 📋 Planned
 
 > 💡 Have a feature request? [Open an issue](https://github.com/quadrocorp/bunchotext/issues)
