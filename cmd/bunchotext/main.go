@@ -1,42 +1,11 @@
+// Package main is the entry point for the bunchotext CLI application.
+// It delegates all command handling to the cmd package following Cobra conventions.
 package main
 
-import (
-	"flag"
-	"fmt"
-	"os"
-	"strings"
+import "github.com/quadrocorp/bunchotext/internal/cmd"
 
-	"github.com/quadrocorp/bunchotext/internal/core"
-)
-
+// main initializes and executes the Cobra command tree.
+// All flag parsing, validation, and business logic is handled in cmd/*.go.
 func main() {
-	dirFlag := flag.String("d", ".", "Directory to search")
-	outFlag := flag.String("o", "output.txt", "Output file path")
-	typeFlag := flag.String("t", "go", fmt.Sprintf("File type preset (%s)", getAvailableTypes()))
-
-	flag.Parse()
-
-	if _, exists := core.FilePatterns[*typeFlag]; !exists {
-		fmt.Fprintf(os.Stderr, "error: invalid type '%s'. Available types: %s\n", *typeFlag, getAvailableTypes())
-		os.Exit(1)
-	}
-
-	fmt.Printf("Scanning directory: %s\n", *dirFlag)
-	fmt.Printf("Filtering for type: %s\n", *typeFlag)
-	fmt.Printf("Writing to: %s\n", *outFlag)
-
-	if err := core.ProcessDirectory(*dirFlag, *typeFlag, *outFlag); err != nil {
-		fmt.Fprintf(os.Stderr, "error: %v\n", err)
-		os.Exit(1)
-	}
-
-	fmt.Println("Done!")
-}
-
-func getAvailableTypes() string {
-	keys := make([]string, 0, len(core.FilePatterns))
-	for k := range core.FilePatterns {
-		keys = append(keys, k)
-	}
-	return strings.Join(keys, ", ")
+	cmd.Execute()
 }
