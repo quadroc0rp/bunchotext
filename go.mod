@@ -1,4 +1,4 @@
-module github.com/quadrocorp/bunchotext
+module github.com/quadroc0rp/bunchotext
 
 go 1.25.0
 

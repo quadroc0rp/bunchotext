@@ -5,14 +5,14 @@
 <p align="center">
   <a href="https://go.dev/dl/"><img src="https://img.shields.io/badge/Go-1.21+-00ADD8?logo=go&logoColor=white" alt="Go Version"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT"></a>
-  <a href="https://github.com/quadrocorp/bunchotext/graphs/contributors"><img src="https://img.shields.io/github/contributors/quadrocorp/bunchotext?color=success&logo=github" alt="Contributors"></a>
+  <a href="https://github.com/quadroc0rp/bunchotext/graphs/contributors"><img src="https://img.shields.io/github/contributors/quadroc0rp/bunchotext?color=success&logo=github" alt="Contributors"></a>
   <a href="#-usage"><img src="https://img.shields.io/badge/Type-CLI-blue?logo=terminal" alt="Type: CLI"></a>
-  <a href="https://goreportcard.com/report/github.com/quadrocorp/bunchotext"><img src="https://goreportcard.com/badge/github.com/quadrocorp/bunchotext" alt="Go Report Card"></a>
+  <a href="https://goreportcard.com/report/github.com/quadroc0rp/bunchotext"><img src="https://goreportcard.com/badge/github.com/quadroc0rp/bunchotext" alt="Go Report Card"></a>
 </p>
 
 ---
 
-**bunchotext** is a lightweight, high-performance CLI tool written in Go designed to concatenate source code files into a single text document. 
+**bunchotext** is a lightweight, high-performance CLI tool written in Go designed to concatenate source code files into a single text document.
 
 It is specifically optimized for preparing codebases for **Large Language Models (LLMs)**. By bundling your project files with clear separators, you can easily paste entire modules or directories into AI chat contexts for refactoring, debugging, or analysis without losing file structure context.
 
@@ -32,31 +32,33 @@ It is specifically optimized for preparing codebases for **Large Language Models
 
 ### Option 1: Pre-built Binaries (Recommended)
 
-Download the latest pre-compiled binary for your platform from the [Releases page](https://github.com/quadrocorp/bunchotext/releases  ).
+Download the latest pre-compiled binary for your platform from the [Releases page](https://github.com/quadroc0rp/bunchotext/releases).
 
 #### **Linux (amd64)**
+
 ```bash
-wget https://github.com/quadrocorp/bunchotext/releases/latest/download/bunchotext-linux-amd64  
+wget https://github.com/quadroc0rp/bunchotext/releases/latest/download/bunchotext-linux-amd64
 chmod +x bunchotext-linux-amd64
 sudo mv bunchotext-linux-amd64 /usr/local/bin/bunchotext
 ```
 
 #### **macOS**
+
 ```bash
 # Intel Macs
-wget https://github.com/quadrocorp/bunchotext/releases/latest/download/bunchotext-darwin-amd64  
+wget https://github.com/quadroc0rp/bunchotext/releases/latest/download/bunchotext-darwin-amd64
 chmod +x bunchotext-darwin-amd64
 sudo mv bunchotext-darwin-amd64 /usr/local/bin/bunchotext
 
 # Apple Silicon (M1/M2/M3)
-wget https://github.com/quadrocorp/bunchotext/releases/latest/download/bunchotext-darwin-arm64  
+wget https://github.com/quadroc0rp/bunchotext/releases/latest/download/bunchotext-darwin-arm64
 chmod +x bunchotext-darwin-arm64
 sudo mv bunchotext-darwin-arm64 /usr/local/bin/bunchotext
 ```
 
 #### **Windows**
 
-1. Download `bunchotext-windows-amd64.exe` from the [Releases page](https://github.com/quadrocorp/bunchotext/releases  )
+1. Download `bunchotext-windows-amd64.exe` from the [Releases page](https://github.com/quadroc0rp/bunchotext/releases)
 2. Rename to `bunchotext.exe` (optional)
 3. Add the folder to your system `PATH`, or run directly from the download location
 
@@ -65,13 +67,15 @@ sudo mv bunchotext-darwin-arm64 /usr/local/bin/bunchotext
 ### Option 2: Build from Source (Requires Go)
 
 **Prerequisites:**
-- [Go](https://go.dev/dl/  ) (version 1.21 or later)
-- [Make](https://www.gnu.org/software/make/  ) (optional, but recommended)
+
+- [Go](https://go.dev/dl/) (version 1.21 or later)
+- [Make](https://www.gnu.org/software/make/) (optional, but recommended)
 
 #### Using Makefile (Recommended)
+
 ```bash
 # Clone the repository
-git clone https://github.com/quadrocorp/bunchotext.git  
+git clone https://github.com/quadroc0rp/bunchotext.git
 cd bunchotext
 
 # Build for your current platform
@@ -82,9 +86,10 @@ make install
 ```
 
 #### Manual Build (Without Make)
+
 ```bash
 # Clone the repository
-git clone https://github.com/quadrocorp/bunchotext.git  
+git clone https://github.com/quadroc0rp/bunchotext.git
 cd bunchotext
 
 # Build for current platform
@@ -98,13 +103,14 @@ sudo mv bunchotext /usr/local/bin/
 ```
 
 #### Cross-Platform Builds
+
 ```bash
 # Build for all platforms (creates release artifacts)
 make release
 
 # Build for specific platform
 make build-linux
-make build-mac  
+make build-mac
 make build-windows
 ```
 
@@ -113,12 +119,13 @@ make build-windows
 ### Option 3: Go Install
 
 ```bash
-go install github.com/quadrocorp/bunchotext/cmd/bunchotext@latest
+go install github.com/quadroc0rp/bunchotext/cmd/bunchotext@latest
 ```
 
-*Note: This requires the module to be published and accessible via Go proxy.*
+_Note: This requires the module to be published and accessible via Go proxy._
 
 ---
+
 ## 🚀 Usage
 
 ### Command Structure
@@ -149,7 +156,7 @@ bunchotext [command] [flags]
 
 | Flag     | Short | Required | Description                                      |
 | -------- | ----- | -------- | ------------------------------------------------ |
-| `--type` | `-t`  | ✅ Yes    | File type preset: `go`, `py`, `js`, `ts`, `json` |
+| `--type` | `-t`  | ✅ Yes   | File type preset: `go`, `py`, `js`, `ts`, `json` |
 
 #### Auto Mode (`auto` subcommand)
 
@@ -285,52 +292,65 @@ ls -lh bunchotext-*
 #    - Upload binaries:
 #      • bunchotext-linux-amd64
 #      • bunchotext-darwin-amd64
-#      • bunchotext-darwin-arm64  
+#      • bunchotext-darwin-arm64
 #      • bunchotext-windows-amd64.exe
 #    - Write changelog and publish
 ```
 
 ---
+
 ## 🗺️ Roadmap
 
-| Feature                        | Status      | Version | Description                                                   |
-| ------------------------------ | ----------- | ------- | ------------------------------------------------------------- |
-| **Core Foundation**            |             |         |                                                               |
-| Basic mode with type filtering | ✅ Completed | v1.0.0  | Bundle files by preset type (`go`, `py`, `js`, `ts`)          |
-| Smart directory ignoring       | ✅ Completed | v1.0.0  | Skip `.git`, `node_modules`, `vendor`, etc. by default        |
-| Clear output formatting        | ✅ Completed | v1.0.0  | File headers with separators for easy parsing                 |
-| Multi-platform builds          | ✅ Completed | v1.0.0  | Pre-built binaries for Linux, macOS, Windows                  |
-| **CLI Enhancements**           |             |         |                                                               |
-| Cobra framework migration      | ✅ Completed | v1.1.0  | Refactored to industry-standard CLI framework                 |
-| Auto mode (type detection)     | ✅ Completed | v1.1.0  | Automatically detect and bundle dominant file type            |
-| All mode (unfiltered bundle)   | ✅ Completed | v1.1.0  | Bundle all text files regardless of extension                 |
-| Gitignore support              | ✅ Completed | v1.1.0  | Optional `.gitignore` pattern matching via `--gitignore`      |
-| Binary file detection          | ✅ Completed | v1.1.0  | Skip non-text files to avoid corrupt output                   |
-| `--no-ignore-dirs` flag        | ✅ Completed | v1.1.0  | Override default ignores for complete backups                 |
-| VS Code tasks integration      | ✅ Completed | v1.1.0  | Pre-configured build/debug tasks for contributors             |
-| License compliance docs        | ✅ Completed | v1.1.0  | `THIRD-PARTY-NOTICES.md` for dependency transparency          |
-| **Planned Features**           |             |         |                                                               |
-| JSON configuration file        | 📋 Planned  | v1.2.0  | Define custom presets and ignore rules via `.bunchotext.json` |
-| Extended language presets      | 📋 Planned  | v1.2.0  | Add `rs`, `cpp`, `rb`, `php`, `java`, `cs` support            |
-| Nested `.gitignore` support    | 📋 Planned  | v1.2.0  | Respect `.gitignore` files in subdirectories                  |
-| Homebrew formula               | 📋 Planned  | v1.2.0  | `brew install bunchotext` for macOS users                     |
-| Chocolatey package             | 📋 Planned  | v1.2.0  | `choco install bunchotext` for Windows users                  |
-| Custom header/footer templates | 📋 Planned  | v1.3.0  | User-defined formatting for bundled output                    |
-| Pre-configured AI templates    | 📋 Planned  | v1.3.0  | Auto-add system prompts for Claude, GPT, Gemini, etc.         |
-| Progress bar / verbose output  | 📋 Planned  | v1.3.0  | Visual feedback during large directory scans                  |
-| Streaming mode for large repos | 📋 Planned  | v2.0.0  | Process files incrementally to reduce memory usage            |
+| Feature                           | Status | Version | Description                                                                                                                                                                                                                                  |
+| --------------------------------- | ------ | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Core Foundation**               |        |         |                                                                                                                                                                                                                                              |
+| Basic mode with type filtering    | ✅      | v1.0.0  | Bundle files by preset type (`go`, `py`, `js`, `ts`)                                                                                                                                                                                         |
+| Smart directory ignoring          | ✅      | v1.0.0  | Skip `.git`, `node_modules`, `vendor`, etc. by default                                                                                                                                                                                       |
+| Clear output formatting           | ✅      | v1.0.0  | File headers with separators for easy parsing                                                                                                                                                                                                |
+| Multi-platform builds             | ✅      | v1.0.0  | Pre-built binaries for Linux, macOS, Windows                                                                                                                                                                                                 |
+| **CLI Enhancements**              |        |         |                                                                                                                                                                                                                                              |
+| Cobra framework migration         | ✅      | v1.1.0  | Refactored to industry-standard CLI framework                                                                                                                                                                                                |
+| Auto mode (type detection)        | ✅      | v1.1.0  | Automatically detect and bundle dominant file type                                                                                                                                                                                           |
+| All mode (unfiltered bundle)      | ✅      | v1.1.0  | Bundle all text files regardless of extension                                                                                                                                                                                                |
+| Gitignore support                 | ✅      | v1.1.0  | Optional `.gitignore` pattern matching via `--gitignore`                                                                                                                                                                                     |
+| Binary file detection             | ✅      | v1.1.0  | Skip non-text files to avoid corrupt output                                                                                                                                                                                                  |
+| `--no-ignore-dirs` flag           | ✅      | v1.1.0  | Override default ignores for complete backups                                                                                                                                                                                                |
+| VS Code tasks integration         | ✅      | v1.1.0  | Pre-configured build/debug tasks for contributors                                                                                                                                                                                            |
+| License compliance docs           | ✅      | v1.1.0  | `THIRD-PARTY-NOTICES.md` for dependency transparency                                                                                                                                                                                         |
+|                                   |        |         |                                                                                                                                                                                                                                              |
+| `ignoreFiles` config              | 📋     | v1.2.0  | Add `ignoreFiles` slice in `config.go` for lock files (`package-lock.json`, `go.sum`, `yarn.lock`, `*.lock`)                                                                                                                                 |
+| `.txt` exclusion                  | 📋     | v1.2.0  | By default, exclude `.txt` files from bundling to avoid recursive inclusion of previous                                                                                                                                                      |
+| Config-only mode                  | 📋     | v1.2.0  | New `--config-only` flag or preset to bundle only config files: `tsconfig.json`, `vite.config.*`, `pyproject.toml`, `.env.example`                                                                                                           |
+| Documentation-only mode           | 📋     | v1.2.0  | New `--docs-only` flag or preset to bundle only documentation files: `LICENSE`, `README.md`,  `CHANGELOG.md`, `CONTRIBUTIONS.md`, `ADR Notes`                                                                                                |
+| **`.bt` file extension**          | 📋     | v1.3.0  | New default output extension `.bt` (bunchotext special format) with optional `--txt` fallback; parser detects format via magic header                                                                                                        |
+| **`--include-tree` flag**         | 📋     | v1.3.0  | Append `tree` output at top of bundle for structural context (optional for `.txt` standard output, required for bundling and `.bt` output)                                                                                                   |
+| **Self-describing header format** | 📋     | v1.3.0  | Standardized header block that other bunchotext instances can parse to auto-detect project metadata and config: `<!-- BT-PROJECT: name="myapp" lang="ts" generated="2026-03-11T12:00:00Z" -->` for example                                   |
+| Bundle function                   | 📋     | v1.3.0  | A command to bundle up the project's bones (no deps, or artifacts) into a `.bt` file, with metadata, tree and other info. It will ask user to choose preferred language, or use auto mode with additional modes available: `configs`, `docs` |
+| Unpack                            | 📋     | v1.3.0  | A command to unpack the bundled project's `.bt` file, which recreates the file structure, using the packed up tree, recreates files.                                                                                                         |
+|                                   | 📋     |         |                                                                                                                                                                                                                                              |
+|                                   | 📋     |         |                                                                                                                                                                                                                                              |
+|                                   | 📋     |         |                                                                                                                                                                                                                                              |
+|                                   | 📋     |         |                                                                                                                                                                                                                                              |
+|                                   | 📋     |         |                                                                                                                                                                                                                                              |
+|                                   | 📋     |         |                                                                                                                                                                                                                                              |
+|                                   | 📋     |         |                                                                                                                                                                                                                                              |
+|                                   |        |         |                                                                                                                                                                                                                                              |
+
 
 **Legend**: ✅ Completed | 🔄 In Progress | 📋 Planned
 
-> 💡 Have a feature request? [Open an issue](https://github.com/quadrocorp/bunchotext/issues)
+> 💡 Have a feature request? [Open an issue](https://github.com/quadroc0rp/bunchotext/issues)
 
 ---
+
 <a id="contributing"></a>
+
 ## 🤝 Contributing
 
 Contributions are welcome! Since file type associations are stored in simple maps within the code, adding support for a new language is straightforward.
 
 ### Adding a New Language Preset
+
 1. Fork the repository
 2. Create a feature branch: `git checkout -b feature/add-rust-support`
 3. Update `internal/core/config.go`:
@@ -344,11 +364,14 @@ Contributions are welcome! Since file type associations are stored in simple map
 5. Submit a Pull Request
 
 ### General Contribution Guidelines
+
 - Keep changes focused and well-documented
 - Update the README if adding user-facing features
 
 ### Reporting Issues
-Found a bug or have a feature request? [Open an issue](https://github.com/quadrocorp/bunchotext/issues) with:
+
+Found a bug or have a feature request? [Open an issue](https://github.com/quadroc0rp/bunchotext/issues) with:
+
 - A clear description of the problem or idea
 - Steps to reproduce (for bugs)
 - Your OS and Go version (if relevant)
@@ -362,7 +385,7 @@ This project is licensed under the MIT License.
 ```text
 MIT License
 
-Copyright (c) 2026 Tsupko Nikita "quadrocorp" Romanovich
+Copyright (c) 2026 Tsupko Nikita "quadroc0rp" Romanovich
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -386,4 +409,4 @@ SOFTWARE.
 ---
 
 > **Made with ❤️ for developers and AI enthusiasts**  
-> [Report an issue](https://github.com/quadrocorp/bunchotext/issues  ) • [View source](https://github.com/quadrocorp/bunchotext  ) • [Releases](https://github.com/quadrocorp/bunchotext/releases  )
+> [Report an issue](https://github.com/quadroc0rp/bunchotext/issues) • [View source](https://github.com/quadroc0rp/bunchotext) • [Releases](https://github.com/quadroc0rp/bunchotext/releases)
