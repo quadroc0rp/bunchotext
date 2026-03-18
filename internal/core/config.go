@@ -5,11 +5,11 @@ package core
 // These presets are used by the basic and auto modes to filter which files to include.
 // Key: preset name (e.g., "go", "py"), Value: slice of file extensions to match.
 var FilePatterns = map[string][]string{
-	"go":   {".go", ".mod", ".sum"},                            // Go source files and module definitions
-	"py":   {".py", ".pyw", ".ipynb"},                          // Python scripts and Jupyter notebooks
-	"js":   {".js", ".jsx", ".mjs", ".cjs", ".json", ".jsonc"}, // JavaScript/Node.js files
-	"ts":   {".ts", ".tsx", ".d.ts", ".json", ".jsonc"},        // TypeScript source and declaration files
-	"json": {".json", ".jsonc"},                                // JSON maps
+	"go":   {".go", ".mod", ".sum"},         // Go source files and module definitions
+	"py":   {".py", ".pyw", ".ipynb"},       // Python scripts and Jupyter notebooks
+	"js":   {".js", ".jsx", ".mjs", ".cjs"}, // JavaScript/Node.js files
+	"ts":   {".ts", ".tsx", ".d.ts"},        // TypeScript source and declaration files
+	"json": {".json", ".jsonc"},             // JSON maps
 }
 
 // IgnoreDirs contains directory names that should be skipped during traversal by default.
@@ -23,5 +23,6 @@ var IgnoreDirs = map[string]bool{
 	"dist":         true, // Build output directory
 	".idea":        true, // JetBrains IDE configuration
 	".vscode":      true, // VS Code workspace settings
+	".vscode-test": true, // VS Code test instance dir
 	".obsidian":    true, // Obsidian editor settings
 }

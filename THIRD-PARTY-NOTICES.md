@@ -38,7 +38,7 @@ go list -m -f '{{.Dir}}' github.com/sabhiram/go-gitignore
 ```
 MIT License
 
-Copyright (c) 2026 Tsupko Nikita "quadrocorp" Romanovich
+Copyright (c) 2026 Tsupko Nikita "quadroc0rp" Romanovich
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

@@ -7,7 +7,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/quadrocorp/bunchotext/internal/core"
+	"github.com/quadroc0rp/bunchotext/internal/core"
 	"github.com/spf13/cobra"
 )
 

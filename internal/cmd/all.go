@@ -3,7 +3,7 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/quadrocorp/bunchotext/internal/core"
+	"github.com/quadroc0rp/bunchotext/internal/core"
 	"github.com/spf13/cobra"
 )
 
