@@ -2,7 +2,7 @@
 // It delegates all command handling to the cmd package following Cobra conventions.
 package main
 
-import "github.com/quadrocorp/bunchotext/internal/cmd"
+import "github.com/quadroc0rp/bunchotext/internal/cmd"
 
 // main initializes and executes the Cobra command tree.
 // All flag parsing, validation, and business logic is handled in cmd/*.go.
